@@ -1,33 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(1)
+  const [usersData, setUsersData] = useState([])
 
+  const clickHandler = () => {
+    setCount(count + 1)
+  }
+
+  const fetchUsers = async () => {
+    console.log("🚨 API CALLED");
+    const resp = await fetch('https://jsonplaceholder.typicode.com/users')
+    const usersData = await resp.json()
+    return usersData;
+  }
+
+  // Runs once on mount 
+  useEffect(()=>{
+    (async function(){
+      const data = await fetchUsers();
+      setUsersData(data)
+    })();
+  }, []) 
+
+  console.log('>>> USER DATA ',usersData)    
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button onClick={clickHandler}>
           count is {count}
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div>
+        {usersData.length == 0 && "Empty Data"}
+       {usersData.length > 0 && "Fetched Data"} 
+      </div>
     </>
   )
 }
