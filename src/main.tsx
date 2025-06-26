@@ -5,7 +5,8 @@ import './index.css'
 // import AppUseEffectExample from './AppUseEffectExample.tsx'
 // import AppUseEffectWithMemo from './AppUseEffectWithMemo.tsx'
 // import AppUseMemoSearching from './AppUseMemoSearching.tsx'
-import AppUseMemoToggle from './AppUseMemoToggle.tsx'
+// import AppUseMemoToggle from './AppUseMemoToggle.tsx'
+import { AppUseContext } from './AppUseContext.tsx'
 // import AppSearchingWithoutUseMemo from './AppSearchingWithoutUseMemo.tsx'
 
 createRoot(document.getElementById('root')!).render(
@@ -14,7 +15,8 @@ createRoot(document.getElementById('root')!).render(
     // <AppUseEffectExample/>
     // <AppUseEffectWithMemo/>
     // <AppUseMemoSearching/>
-    <AppUseMemoToggle/>
+    // <AppUseMemoToggle/>
+    <AppUseContext/>
     // <AppSearchingWithoutUseMemo/>
   // </StrictMode>,
 )
